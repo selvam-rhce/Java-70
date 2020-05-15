@@ -1,7 +1,9 @@
 package co.edureka.jdbc;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -41,14 +43,33 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public Employee searchEmp(int eno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Employee emp = null;
+		String sql = "select ename,sal from emp where empno="+eno;
+		ResultSet rs = st.executeQuery(sql);
+		
+		if(rs.next()) {
+			String name = rs.getString(1);
+			float sal = rs.getFloat(2);
+			emp = new Employee(eno,name,sal);
+		}
+		return emp;
 	}
 
 	@Override
 	public List<Employee> getEmployees() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Employee> emps = new ArrayList<>();
+		String sql = "select * from emp";
+		ResultSet rs = st.executeQuery(sql);
+		
+		while(rs.next()) {
+			int eno = rs.getInt(1);
+			String name = rs.getString(2);
+			float sal = rs.getFloat(3);
+			Employee emp = new Employee(eno,name,sal);
+			/*--- adding employee object to List --*/
+			emps.add(emp);
+		}
+		return emps;
 	}
 
 }
