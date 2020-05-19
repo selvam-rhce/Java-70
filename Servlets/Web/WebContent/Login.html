@@ -1,0 +1,54 @@
+<html>
+<head>
+ <title>edureka || login</title>
+ <style>
+  body{
+   margin:0px;
+   background:orangered;
+  }
+  #login-form{
+    width:350px;
+    background:linear-gradient(45deg,darkslategray,blueviolet);
+    font-size:18px;
+    color:white;
+    padding:10px;
+    text-align:center;
+    border-radius:20px;
+    margin:200px auto;
+  }
+  input{
+    font-size:18px;
+  }
+  .btn{
+   background:transparent;
+   padding:5px 25px;
+   
+   border:1px solid white;
+   border-radius:15px;
+   color:white;
+  }
+  .btn:hover{
+   box-shadow:0 0 10px white;
+   background-color:white;
+   color:black;
+  }
+ </style>
+</head>
+
+<body> 
+  <form action="login" method="post" id="login-form">
+   <p>
+    User Name<br>
+    <input type=text name="txtUid" autofocus placeholder="enter username" required>
+   </p> 
+   <p>
+    Password<br>
+    <input type=password name="txtPwd" placeholder="enter password" required>
+   </p>   
+   <p>
+     <input type="submit" value="L o g i n" class="btn">
+   </p>
+  </form>
+ 
+</body>
+</html>
