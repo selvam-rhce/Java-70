@@ -4,7 +4,8 @@
 <hibernate-mapping>
  <class name="co.edureka.models.Student" table="student">
    <id name="studid" column="studid">
-     <generator class="assigned"/>
+   <!-- generator class="assigned"/> -->
+     <generator class="increment"/>
    </id>
    <property name="sname" column="sname"/>
    <property name="email" column="email"/>
