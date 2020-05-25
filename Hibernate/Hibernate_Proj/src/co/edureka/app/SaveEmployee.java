@@ -14,7 +14,7 @@ public class SaveEmployee {
 		Session session = sfactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
-		Employee emp = new Employee(101,"Sunil Joseph", 25000.5f);
+		Employee emp = new Employee(102,"Sunil Joseph", 25000.5f);
 		
 		session.save(emp);
 		

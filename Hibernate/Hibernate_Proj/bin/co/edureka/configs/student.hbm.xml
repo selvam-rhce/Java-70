@@ -3,6 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
  <class name="co.edureka.models.Student" table="student">
+   <cache usage="read-only"/>
    <id name="studid" column="studid">
    <!-- generator class="assigned"/> -->
      <generator class="increment"/>

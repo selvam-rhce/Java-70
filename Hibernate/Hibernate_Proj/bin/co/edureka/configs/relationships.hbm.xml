@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="co.edureka.models.Faculty" table="faculty">
+		<id name="facid" column="facid">
+			<generator class="assigned" />
+		</id>
+		<property name="facname" column="facname" />
+		<set name="batches" cascade="all" inverse="true" lazy="true">
+			<key>
+				<column name="facid" />
+			</key>
+			<one-to-many class="co.edureka.models.Batch" />
+		</set>
+		
+	</class>
+
+	<class name="co.edureka.models.Batch" table="batch">
+		<id name="batchid" column="batchid">
+			<generator class="assigned" />
+		</id>
+		<property name="course" column="course" />
+		<many-to-one name="faculty" class="co.edureka.models.Faculty">
+		  <column name="facid" />
+		</many-to-one>
+	</class>
+</hibernate-mapping> 

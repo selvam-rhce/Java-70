@@ -12,14 +12,17 @@
 		<property name="connection.password">password</property>
 
 		<!-- Hibernate properties -->
-		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>		
+		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="show_sql">true</property>
-		<property name="hbm2ddl.auto">update</property>
-		
-		
+		<!-- <property name="hbm2ddl.auto">update</property> -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+
 		<!-- Mapping Resources -->
-		<!-- 
-		<mapping resource="co/edureka/configs/student.hbm.xml" />-->	
-		<mapping class="co.edureka.models.Employee"/>	
+
+		<mapping resource="co/edureka/configs/student.hbm.xml" />
+		<mapping resource="co/edureka/configs/relationships.hbm.xml" />
+		<mapping class="co.edureka.models.Employee" />
 	</session-factory>
 </hibernate-configuration>      

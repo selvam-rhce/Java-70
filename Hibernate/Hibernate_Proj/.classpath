@@ -20,5 +20,8 @@
 	<classpathentry kind="lib" path="E:/Edureka/Java/Softwares/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="E:/Edureka/Java/Softwares/jaxb-api-2.3.0.jar"/>
 	<classpathentry kind="lib" path="E:/Edureka/Java/Softwares/jaxb-impl-2.2.6.jar"/>
+	<classpathentry kind="lib" path="E:/Java-70/Hibernate/hibernate-release-5.2.12.Final/lib/optional/ehcache/ehcache-2.10.3.jar"/>
+	<classpathentry kind="lib" path="E:/Java-70/Hibernate/hibernate-release-5.2.12.Final/lib/optional/ehcache/hibernate-ehcache-5.2.12.Final.jar"/>
+	<classpathentry kind="lib" path="E:/Java-70/Hibernate/hibernate-release-5.2.12.Final/lib/optional/ehcache/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
