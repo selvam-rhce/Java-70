@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>EMS || Search</title>
+<style>
+body {
+	margin: 0px;
+	background: orangered;
+}
+
+#search-form {
+	width: 400px;
+	background: linear-gradient(45deg, darkslategray, blueviolet);
+	font-size: 18px;
+	color: white;
+	padding: 10px;	
+	border-radius: 20px;
+	margin: 200px auto;
+	box-shadow: 0 0 10px black;
+}
+tr{
+ height:50px;
+}
+input {
+	font-size: 18px;
+}
+
+.btn {
+	background: transparent;
+	padding: 5px 25px;
+	border: 1px solid white;
+	border-radius: 15px;
+	color: white;
+}
+
+.btn:hover {
+	box-shadow: 0 0 10px white;
+	background-color: white;
+	color: black;
+}
+</style>
+</head>
+
+<body>
+	<table id="search-form">
+		<tr>
+			<td>Emp No</td>
+			<td><input type=text id="txteno" autofocus
+				placeholder="enter employee no" onblur="searchEmployee(this.value)"></td>
+		</tr>
+
+		<tr>
+			<td>Name</td>
+			<td><span id="name_val"></span></td>
+		</tr>
+
+		<tr>
+			<td>Salary</td>
+			<td><span id="sal_val"></span></td>
+		</tr>
+	</table>
+	
+	<script>
+	 let xhr;
+	 function searchEmployee(empno){
+		 if(window.XMLHttpRequest)
+			 xhr = new XMLHttpRequest();
+		 else
+			 xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		 
+		 //to specify where the data to be submitted and how
+		 xhr.open("GET","search?eno="+empno, true) //asynchronous call
+		 
+		 //register a callback method for XHR state change
+		 xhr.onreadystatechange=fun1
+		 
+		 xhr.send()
+	 }
+	 
+	 function fun1(){
+		 //alert('Ready State = '+ xhr.readyState)
+		 if(xhr.readyState == 4 && xhr.status == 200){
+			 //get response text
+			 let response = xhr.responseText
+			 let name, sal
+			 if(response.length>0){
+				 let jsonObj = JSON.parse(response) //convert response string to JSON
+				 name = jsonObj.name
+				 sal = jsonObj.sal
+			 }
+			 else{
+				 name='NO MATCH'
+				 sal='NO MATCH'
+			 }
+			 document.getElementById('name_val').innerText = name
+			 document.getElementById('sal_val').innerText = sal
+		 }
+	 }
+	</script>
+</body>
+</html>
