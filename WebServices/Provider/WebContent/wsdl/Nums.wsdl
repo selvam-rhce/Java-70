@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://edureka.co" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://edureka.co" xmlns:intf="http://edureka.co" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://edureka.co" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="addNum">
+    <complexType>
+     <sequence>
+      <element name="x" type="xsd:int"/>
+      <element name="y" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addNumResponse">
+    <complexType>
+     <sequence>
+      <element name="addNumReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="subNum">
+    <complexType>
+     <sequence>
+      <element name="a" type="xsd:float"/>
+      <element name="b" type="xsd:float"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="subNumResponse">
+    <complexType>
+     <sequence>
+      <element name="subNumReturn" type="xsd:float"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="subNumRequest">
+
+      <wsdl:part element="impl:subNum" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="subNumResponse">
+
+      <wsdl:part element="impl:subNumResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addNumResponse">
+
+      <wsdl:part element="impl:addNumResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addNumRequest">
+
+      <wsdl:part element="impl:addNum" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Nums">
+
+      <wsdl:operation name="addNum">
+
+         <wsdl:input message="impl:addNumRequest" name="addNumRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addNumResponse" name="addNumResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="subNum">
+
+         <wsdl:input message="impl:subNumRequest" name="subNumRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:subNumResponse" name="subNumResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="NumsSoapBinding" type="impl:Nums">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="addNum">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addNumRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addNumResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="subNum">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="subNumRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="subNumResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="NumsService">
+
+      <wsdl:port binding="impl:NumsSoapBinding" name="Nums">
+
+         <wsdlsoap:address location="http://localhost:65535/Provider/services/Nums"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,665 @@
+RESTful Web Services
+====================
+
+RESTful Web Services are REST architecture based web services. 
+
+REST stands for REpresentational State Transfer. 
+
+REST is web standards based architecture and uses HTTP Protocol for data communication. 
+
+In REST Architecture everything is a resource. 
+
+RESTful web services are light weight, highly scalable and maintainable and are very commonly used to create APIs for web based applications.
+
+In the REST architectural style, data and functionality are considered as resources and are accessed using Uniform Resource Identifiers (URIs), typically links on the Web. 
+
+Resources are manipulated using a fixed set of four - create, read, update, delete operations: POST, GET, PUT, and DELETE. 
+
+PUT updates a resource, which can be then deleted by using DELETE. GET retrieves the current state of a resource in some representation. POST creates a new resource.
+
+
+REST was first introduced by Roy Fielding in 2000.
+
+REST uses various representations to represent a resource like text, HTML, JSON and XML. 
+
+HTTP Methods
+------------
+HTTP methods commonly used in REST based architecture.
+
+(a) GET - Provides a read only access to a resource.
+
+(b) PUT - Used to update a resource.
+
+(c) DELETE - Used to remove a resource.
+
+(d) POST - Used to create a new resource.
+
+(e) OPTIONS - Used to get the supported operations on a resource.
+etc
+
+
+JAX-RS provides the implementation of RESTful web services,  
+
+JAX-RS is a specification for RESTful Web Services with Java and it is given by Sun.  Since it is a specification, other frameworks can be written to implement these specifications, and that includes Jersey from Oracle, Resteasy from Jboss, CXF from Apache etc.
+
+What ever the data/response we will get from the server is known as Resource
+
+Each resource can be accessed by its URI's.  
+
+REST guidelines always talks about stateless communication between client and the Server.  
+
+Stateless means, every single request from client to server will be considered as a fresh request. 
+Because of this reason REST always prefers to choose HTTP as it a stateless protocol.
+
+RESTful used 4 main HTTP methods…
+
+> GET 
+> POST
+> PUT
+> DELETE
+
+Generally we will prefer RESTful Services in these scenarios…
+
+> If clients require caching, means if you have limited bandwidth
+> If you want every thing to be stateless
+
+Creating RESTFul Web Service
+----------------------------
+HTTP Method	URI		Operation			
+-----------	---		---------	
+GET	/UserService/users	Get list of users		
+
+GET	/UserService/users/1	Get User with Id 1		
+
+PUT	/UserService/users/2	update User with Id 2	
+
+POST	/UserService/users/3	insert User with Id 3	
+
+DELETE	/UserService/users/1	Delete User with Id 1	
+
+
+JAX-RS is the Java implementation for RESTful web services
+
+
+
+RESTful Web Services (JAX-RS) Annotations
+-----------------------------------------
+
+1) @Path
+
+Its a Class & Method level of annotation
+This will check the path next to the base URL
+
+http://localhost:(port)/<YourApplicationName>/<UrlPattern in web.xml>/<path>
+Here <path> is the part of URI, and this will be identified by @path annotation at class/method level
+
+2) @GET
+
+It is a method level of annotation, this annotation indicates that the following method should respond to the HTTP GET request only,  If we annotate our method with @GET, the execution flow will enter that following method if we send GET request from the client
+
+3) @POST
+
+It is a method level of annotation, this annotation indicates that the following method should respond to the HTTP POST request only.
+
+4) @PUT
+
+It is a method level of annotation, this annotation indicates that the following method should respond to the HTTP PUT request only.
+
+5) @DELETE
+
+It is a method level of annotation, this annotation indicates that the following method should respond to the HTTP DELETE request only.
+
+6) @Produces
+
+It is a method or field level annotation. 
+This tells which MIME type is delivered by the method annotated with @GET; means when ever we send a HTTP GET request to our RESTful service, it will invokes particular method and produces the output in different formats; there you can specifies - in what are all formats (MIME) your method can produce the output, by using @produces annotation.
+
+Remember: We will use @Produces annotation for GET requests only.
+
+7) @Consumes
+
+This is a class and method level annotation, this will define which MIME type is consumed by the particular method; means in which format the method can accept the input from the client.
+
+
+@PathParam, @QueryParam, @MatrixParam are parameter annotations which allows us to map variable URI path fragments into your method call. These three annotations will come into picture in case if we are passing the input values to the restful service through the URL. After that Rest service will extract those values by using these annotations. Regarding @FormParam, restful web service will use this annotation to retrieve the values sent by the client through some HTML/JSP form.
+
+8) @PathParam URL Syntax
+
+    http://localhost:7001/<Rest Service Name>/rest/customers/100/edureka
+
+the two parameters appear in the end of the above URL [100 & edureka], which are separated by forward slash(/) are called as path parameters,
+
+9) @QueryParam URL Syntax
+
+    http://localhost:7001/…/rest/customers?custNo=100&custName=edureka
+
+If the client sends an input in the form of query string in the URL, then those parameters are called as Query Parameters.  In the above case, client passing 2 parameters 100 and edureka  started after question mark (?) symbol and each parameter is separated by & symbol,  those parameters are called as query parameters.
+
+10) @FormParam URL Syntax
+
+If we have a HTML form having two input fields and submit button. Lets client enter those details and submit to the RESTful web service. Then the rest service will extract those details by using this @FormParam annotation.
+
+
+
+
+
+1. Jersey - RESTful Web services in Java
+----------------------------------------
+
+Jersey RESTful Web Services framework is an open source, production quality framework for developing RESTful Web Services in Java that provides support for JAX-RS APIs and serves as a JAX-RS
+
+1) Download the jersey jar files
+
+https://jersey.github.io/download.html
+https://eclipse-ee4j.github.io/jersey/
+
+extract the zip file 
+
+2) Create a Web Application in Tomcat web server
+c:\Tomcat 9.0\webapps\REST1
+
+3) Place all the jar files of jersey into c:\Tomcat 9.0\webapps\REST1\WEB-INF\lib  + java-json.jar
+
+
+JAX-RS Server Code:
+
+c:\Tomcat 9.0\webapps\REST1\WEB-INF\classes
+
+Hello.java
+
+package co.edureka;  
+
+import javax.ws.rs.GET;  
+import javax.ws.rs.Path;  
+import javax.ws.rs.Produces;  
+import javax.ws.rs.core.MediaType; 
+
+@Path("/hello")  
+public class Hello 
+{  
+ @GET  
+ @Produces(MediaType.TEXT_PLAIN)  
+ public String method1() {  
+  return "Method returns for a PLAIN text request";  
+ }  
+
+ // This method is called if XML is requested  
+ @GET  
+ @Produces(MediaType.TEXT_XML)  
+ public String method2() {  
+  return "<?xml version=\"1.0\"?><hello> Hello Jersey</hello>";  
+ }  
+      
+ // This method is called if HTML is requested  
+ @GET  
+ @Produces(MediaType.TEXT_HTML)  
+ public String method3() {  
+  return "<html><body><h1>HTML RESPONSE</h1></body></html> ";  
+ }
+
+ @GET
+ @Produces(MediaType.APPLICATION_JSON)
+ public String method4(){
+  return "{empno:101, ename:Sunil, sal:1234}";
+ }
+}   
+
+
+Note : 
+@Path	The @Path annotation's value is a relative URI path indicating where the Java class will be hosted: for example, /hello. You can also embed variables in the URIs to make a URI path template. For example, you could ask for the name of a user and pass it to the application as a variable in the URI: /hello/{username}.
+
+@GET	The @GET annotation is a request method designator and corresponds to the similarly named HTTP method. The Java method annotated with this request method designator will process HTTP GET requests. The behavior of a resource is determined by the HTTP method to which the resource is responding.
+
+@Produces 	The @Produces annotation is used to specify the MIME media types of representations a resource can produce and send back to the client: for example, "text/plain".
+
+4) WEB-INF/web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>  
+<web-app>  
+
+ <servlet>  
+  <servlet-name>jersey</servlet-name>  
+  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>  
+   <init-param>  
+    <param-name>jersey.config.server.provider.packages</param-name>  
+    <param-value>co.edureka</param-value>  
+   </init-param>  
+   <load-on-startup>1</load-on-startup>  
+ </servlet>  
+
+ <servlet-mapping>  
+   <servlet-name>jersey</servlet-name>  
+   <url-pattern>/rest/*</url-pattern>  
+ </servlet-mapping>  
+</web-app>  
+
+
+
+5) Compile Hello.java , after setting the classpath for the jar files
+
+c:\Tomcat 9.0\webapps\REST1\WEB-INF\classes>javac -d . Hello.java
+
+6) Start Tomcat Server
+
+7) Open browser and provide the URL as 
+http://localhost:65535/REST1/rest/hello
+
+
+https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=17.413081,78.465772&radius=500&type=atm&key=AIzaSyAG41iGvJSpZAgc-d1q873hgU8HTgira1w
+
+Postman is a tool used to test a JSON web service
+
+JAX-RS Client Code
+
+ClientTest.java
+---------------
+
+import java.net.URI;  
+import javax.ws.rs.client.Client;  
+import javax.ws.rs.client.ClientBuilder;  
+import javax.ws.rs.client.WebTarget;  
+import javax.ws.rs.core.MediaType;  
+import javax.ws.rs.core.UriBuilder;  
+import org.glassfish.jersey.client.ClientConfig; 
+
+public class ClientTest
+{  
+public static void main(String[] args) throws Exception
+{  
+ ClientConfig config=new ClientConfig();  
+ Client client=ClientBuilder.newClient(config);  
+
+ URI baseURI=UriBuilder.fromUri("http://localhost:65535/REST1").build();
+
+ WebTarget target=client.target(baseURI);  
+
+ System.out.println(target.path("rest").path("hello").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+
+ System.out.println(target.path("rest").path("hello").request().accept(MediaType.TEXT_XML).get(String.class));  
+
+ System.out.println(target.path("rest").path("hello").request().accept(MediaType.TEXT_HTML).get(String.class));  
+
+ String json_response= target.path("rest").path("hello").request().accept(MediaType.APPLICATION_JSON).get(String.class);
+
+ System.out.println(json_response);
+
+ //java-json.jar	
+ org.json.JSONObject obj=new org.json.JSONObject(json_response);
+ System.out.println("Emp No = "+obj.getInt("empno"));
+ System.out.println("Name   = "+obj.getString("ename"));
+ System.out.println("Salary = "+obj.getInt("sal"));
+}  
+}   
+
+jar file required to compile the program is javax.ws.rs-api-2.0.1.jar + java-json.jar
+
+------------------------------------------------------------------------------------------------------
+
+
+Using Jersey-2 in Eclipse
+=========================
+- intergrate Tomcat Server with Eclipse
+
+1) Create a Maven Project in Eclipse
+File > New > Maven Project
+  > Next
+  > Select "org.apache.maven.archetypes"  maven-archetype-webapp
+  > Next
+     Group Id	 : co.edureka
+     Artifact Id : REST2
+  > Finish
+
+2) In pom.xml - add the additional dependencies for Servlet and Jersey 2.x
+
+mvnrepository.com > Search for "Jersey Container Servlet" & "servlet" & "jersey-hk2"
+
+<dependencies>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish.jersey.containers</groupId>
+    <artifactId>jersey-container-servlet</artifactId>
+    <version>2.28</version>
+</dependency>
+<dependency>
+    <groupId>org.glassfish.jersey.inject</groupId>
+    <artifactId>jersey-hk2</artifactId>
+    <version>2.28</version>
+</dependency>
+</dependencies>
+
+
+For Java 11
+ <dependency>
+   <groupId>javax.xml.bind</groupId>
+   <artifactId>jaxb-api</artifactId>
+   <version>2.3.0</version>
+ </dependency>
+	
+ <dependency>
+   <groupId>javax.activation</groupId>
+   <artifactId>activation</artifactId>
+   <version>1.1.1</version>
+</dependency>
+
+
+2) src/main/webapp/WEB-INF/web.xml
+<web-app>
+<servlet>  
+  <servlet-name>jersey</servlet-name>  
+  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>  
+   <init-param>  
+    <param-name>jersey.config.server.provider.packages</param-name>  
+    <param-value>co.edureka</param-value>  
+   </init-param>  
+   <load-on-startup>1</load-on-startup>  
+ </servlet>  
+
+ <servlet-mapping>  
+   <servlet-name>jersey</servlet-name>  
+   <url-pattern>/rest/*</url-pattern>  
+ </servlet-mapping>  
+</web-app>
+
+
+
+
+3) For Java Resources > src/main/java
+[Right click on Project Node > Build Path > Configure Build Path > Libraries >
+Click on "JRE System Library" > Edit > Enable "Workspace Default JRE"]
+
+
+4) Create a Package with name : co.edureka
+	
+5) Create a Java class in co.edureka package with name : EdurekaServices
+EdurekaServices.java
+
+package co.edureka;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("/edureka")
+public class EdurekaServices 
+{
+ @GET
+ @Produces("text/html")
+ public String localService() {
+  return "<h2>Local Customer Service Center</h2>";		
+ }
+
+ @GET
+ @Path("/nri")
+ @Produces("text/html")
+ public String nriService() {
+  return "<h2>NRI Customer Service Center</h2>";		
+ }
+}
+
+
+
+package co.edureka;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+@Path("/edureka")
+public class EdurekaServices 
+{
+ @GET
+ @Produces("text/html")
+ public Response localService() 
+ {
+    String output = "<h2>Local Customer Service Center</h2>";
+    return Response.status(200).entity(output).build();
+ }
+
+ @GET
+ @Path("/nri")
+ @Produces("text/html")
+ public Response nriService() {
+   String output = "<h2>NRI Customer Service Center</h2>";
+   return Response.status(200).entity(output).build();
+ } 
+}
+
+6) index.jsp
+
+<html>
+<head>
+<style>
+a:link,a:visited 
+{
+ color:blue;
+ text-decoration:none;
+ font-size:20px;	
+}
+a:hover
+{
+ color:red
+}
+</style>
+</head>
+<body>
+<a href="rest/edureka">Local Service</a> | 
+<a href="rest/edureka/nri">Nri Service</a> |
+
+</body>
+</html>
+
+
+
+7) Run As > Run on Server
+
+8) http://localhost:65535/REST2/rest/edureka
+   http://localhost:65535/REST2/rest/edureka/nri
+
+
+If Required:
+9) Right click on Project Node > Run As > Maven Build > Goal : clean install
+If any error :
+Eclipse > Window > Preferences > Java > Installed JREs : (Include JDK Path)
+
+Eclipse > Window > Preferences > Maven > Java EE Integration : Uncheck "Maven Archiver generates files under the build directory
+*****************************************************************
+
+@PathParam Annotation
+---------------------
+
+In RESTful (JAX-RS) web services @PathParam annotation will be used to bind RESTful URL parameter values to the method arguments.
+
+EdurekaServices.java
+-------------------
+package co.edureka;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+@Path("/edureka")
+public class EdurekaServices {
+ @GET
+ @Path("{name}/{course}")
+ @Produces("text/html")
+ public String enquiry(@PathParam("name") String name, @PathParam("course") String course) {
+  return "<h2>Customer Name - " + name + "<br>Course Name - " + course + "</h2>";		
+ }
+}
+
+Right click on your project > Run As > Run on Server
+
+http://localhost:65535/REST2/rest/edureka/sunil/java
+
+******************************************************
+https://www.gooten.com/dropshipping-platform/api/documentation/products/
+
+https://api.print.io/api/v/5/source/api/products/?recipeid=f255af6f-9614-4fe2-aa8b-1b77b936d9d6&languageCode=en&countryCode=US&all=true
+*****************************************************
+
+@QueryParam Annotation
+======================
+
+In RESTful web services (JAX-RS) @QueryParam annotation will be used to get the query parameters from the URL, 
+
+Consider this URL:
+http://localhost:65535/REST2/rest/edureka/enquiry?name=Sunil&course=Java
+Here query parameters are name, course and their values are Sunil, Java
+
+package co.edureka;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+
+@Path("/edureka")
+public class EdurekaService {
+ @GET
+ @Path("/enquiry")
+ @Produces("text/html")
+ public String enquiry1(@QueryParam("name") String name, @QueryParam("course") String crs) {
+   String output = "<h2>Customer Name : "+name+"<br> Course Name : "+crs+"</h2>";
+   return output; 
+ }
+}
+
+
+http://localhost:65535/REST2/rest/edureka/enquiry?name=Sunil&course=Java
+
+****************************************
+
+@FormParam Annotation
+=====================
+By using @FormParam annotation, RESTful web service would accept HTML form parameters sent by the client in the POST request and bind them to the method variables. Generally @FormParam will come into picture when client send the data in POST request, if it is the GET request @QueryParam would be the best choice.
+
+
+1) Registration Page - registration.html
+
+<html>
+<head>
+<style type="text/css">
+body
+{
+ background-color:#4682b4;
+ font-family:verdana;
+}
+h1
+{
+ text-align:center;
+ font-size:25px;
+}
+table
+{
+ width:400px;
+ font-size:18px;
+ background-color:orange;
+ border-radius:15px;
+ padding:10px;
+}
+tr
+{
+ height: 45px;
+}
+</style>
+</head>
+<body>
+<div>
+<h2>edureka | registration</h2>
+<hr color=blue size=5 width=28%>
+<br><br>
+<form action="rest/edureka/registerCustomer" method="post">
+<table>
+<tr>
+<td>Name</td>
+<td><input type="text" name="name" size="30" autofocus="autofocus" required="required" placeholder="enter name"></td>
+</tr>
+
+<tr>
+<td>Age</td>
+<td><input type="text" name="age" size="30" required="required"> </td>
+</tr>
+
+<tr>
+<td>Address</td>
+<td><input type="text" name="addr" size="30" required="required"> </td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+<input type="submit" value="R E G I S T E R">
+</td>
+</tr>
+</table>
+</form>
+</div>
+</body>
+</html>
+
+2) Create a New Java class in co.edureka package : Registration
+Registration.java
+
+package co.edureka;
+
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+@Path("/edureka")
+public class Registration {
+ @POST
+ @Path("/registerCustomer")
+ @Produces("text/html")
+ public String register(@FormParam("name") String name, @FormParam("age") String age, @FormParam("addr") String address) 
+ {
+   String output = "<div style=color:red;font-size:25px;>Registration Success::<br> Name - <u>"+name+"</u><br> Age - <u>"+age+"</u><br>Address - <u>"+address+"</u><hr></div>";
+   return output;
+ }
+}
+
+---------------------------------------------------------
+Client Program
+
+import java.net.URI;  
+import javax.ws.rs.client.Client;  
+import javax.ws.rs.client.ClientBuilder;  
+import javax.ws.rs.client.WebTarget;  
+import javax.ws.rs.core.MediaType;  
+import javax.ws.rs.core.UriBuilder;  
+import org.glassfish.jersey.client.ClientConfig; 
+
+public class ClientTest1
+{  
+public static void main(String[] args) throws Exception
+{  
+ ClientConfig config=new ClientConfig();  
+ Client client=ClientBuilder.newClient(config);  
+
+ URI baseURI=UriBuilder.fromUri("http://localhost:65535/REST2").build();
+
+ WebTarget target=client.target(baseURI);  
+
+ System.out.println(target.path("rest").path("edureka").path("Sunil").path("Java").request().accept(MediaType.TEXT_HTML).get(String.class));
+
+ System.out.println(target.path("rest").path("edureka").queryParam("name","Joseph").queryParam("course","Android").request().accept(MediaType.TEXT_HTML).get(String.class));
+
+ System.out.println(target.path("rest").path("edureka").path("nri").request().accept(MediaType.TEXT_HTML).get(String.class));  
+}  
+}   
+
+---------------------------------------------------------
+
+
